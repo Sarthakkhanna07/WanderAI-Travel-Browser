@@ -95,25 +95,40 @@ export async function signIn(email: string, password: string) {
  * Sign out the current user
  */
 export async function signOut() {
-  const supabase = createClient();
+  try {
+    const supabase = createClient();
+    if (!supabase) {
+      return { error: null };
+    }
 
-  const { error } = await supabase.auth.signOut();
+    const { error } = await supabase.auth.signOut();
 
-  return { error };
+    return { error };
+  } catch (error) {
+    return { error: null };
+  }
 }
 
 /**
  * Get the current user
  */
 export async function getCurrentUser() {
-  const supabase = createClient();
+  try {
+    const supabase = createClient();
+    if (!supabase) {
+      return { user: null, error: null };
+    }
 
-  const {
-    data: { user },
-    error,
-  } = await supabase.auth.getUser();
+    const {
+      data: { user },
+      error,
+    } = await supabase.auth.getUser();
 
-  return { user, error };
+    return { user, error };
+  } catch (error) {
+    // If Supabase is not configured, return no user
+    return { user: null, error: null };
+  }
 }
 
 /**
