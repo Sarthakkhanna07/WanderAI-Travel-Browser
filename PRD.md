@@ -1,6 +1,10 @@
 # Product Requirements Document (PRD)
 ## Wander AI - Travel Browser
 
+> **This is the product vision and forward-looking roadmap.**
+> Status tags below reflect the current build reality.
+> For what is *actually implemented*, see [`docs/ARCHITECTURE.md`](./docs/ARCHITECTURE.md).
+
 ---
 
 ## 🎯 Product Vision
@@ -98,7 +102,7 @@ Wander AI provides a unified platform that combines:
 
 ## 🚀 Core Features
 
-### 1. Landing Page (`wander.ai`)
+### 1. Landing Page (`wander.ai`) — `Shipped ✅`
 
 **Purpose:** First impression, clear value proposition, entry point
 
@@ -114,7 +118,7 @@ Wander AI provides a unified platform that combines:
 
 ---
 
-### 2. Chat Interface (`wander.ai/chat`)
+### 2. Chat Interface (`wander.ai/chat`) — `Shipped ✅`
 
 **Purpose:** Primary AI assistant for travel discovery and planning
 
@@ -135,7 +139,7 @@ Wander AI provides a unified platform that combines:
 
 ---
 
-### 3. Map View (`wander.ai/map`)
+### 3. Map View (`wander.ai/map`) — `Shipped ✅` *(Mapbox GL JS — interactive map, markers, routes, drag-and-drop)*
 
 **Purpose:** Visual exploration of all itineraries and destinations
 
@@ -157,7 +161,7 @@ Wander AI provides a unified platform that combines:
 
 ---
 
-### 4. Explore (`wander.ai/explore`)
+### 4. Explore (`wander.ai/explore`) — `Shipped ✅`
 
 **Purpose:** Discovery hub for trending content and categories
 
@@ -176,7 +180,7 @@ Wander AI provides a unified platform that combines:
 
 ---
 
-### 5. Following (`wander.ai/following`)
+### 5. Following (`wander.ai/following`) — `Shipped ✅` *(stories, feed, suggested creators, messaging panel)*
 
 **Purpose:** Social feed for followed creators and saved content
 
@@ -193,7 +197,7 @@ Wander AI provides a unified platform that combines:
 
 ---
 
-### 6. Marketplace (`wander.ai/marketplace`)
+### 6. Marketplace (`wander.ai/marketplace`) — `In Progress 🔄` *(UI built, stays mock data; live booking APIs not yet integrated)*
 
 **Purpose:** Integrated booking and travel services marketplace
 
@@ -213,7 +217,7 @@ Wander AI provides a unified platform that combines:
 
 ---
 
-### 7. Profile (`wander.ai/profile`)
+### 7. Profile (`wander.ai/profile`) — `Shipped ✅`
 
 **Purpose:** User dashboard and content management
 
@@ -227,7 +231,7 @@ Wander AI provides a unified platform that combines:
 
 ---
 
-### 8. Add Itinerary - AI (`wander.ai/add-itineraries/ai`)
+### 8. Add Itinerary - AI (`wander.ai/add-itineraries/ai`) — `Shipped ✅` *(text prompt + YouTube video link, both implemented)*
 
 **Purpose:** Automatically extract and structure travel content from video
 
@@ -251,7 +255,7 @@ Wander AI provides a unified platform that combines:
 
 ---
 
-### 9. Add Itinerary - Manual (`wander.ai/add-itineraries/manual`)
+### 9. Add Itinerary - Manual (`wander.ai/add-itineraries/manual`) — `Shipped ✅`
 
 **Purpose:** User-created custom itineraries
 
@@ -372,7 +376,9 @@ travel-browser/
 
 ---
 
-**Document Version:** 1.0  
-**Last Updated:** December 2024  
-**Status:** Pre-Development
+**Document Version:** 1.1
+**Last Updated:** August 2026
+**Status:** Active Development
+
+**Status legend:** `Shipped ✅` — fully implemented · `In Progress 🔄` — partially built · `Planned 📋` — not yet started
 
