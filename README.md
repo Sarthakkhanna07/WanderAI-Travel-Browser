@@ -18,8 +18,8 @@ See [PRD.md](./PRD.md) for current feature status and roadmap.
 |---|---|
 | Framework | Next.js 16 (App Router) + TypeScript |
 | Styling | TailwindCSS v4, Framer Motion |
-| Mapping | **Mapbox GL JS** (not Ola Maps) |
-| AI / LLM | **Groq** — `llama-3.1-8b-instant` (not OpenAI) |
+| Mapping | **Mapbox GL JS** |
+| AI / LLM | **Groq** — `llama-3.1-8b-instant` |
 | Database | Supabase (PostgreSQL) + Prisma ORM |
 | Auth | Supabase Auth (email/password + Google OAuth) |
 | Storage | Supabase Storage (`avatars` bucket) |
