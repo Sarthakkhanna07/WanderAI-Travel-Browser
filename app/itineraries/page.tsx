@@ -71,7 +71,7 @@ export default function ItinerariesPage() {
         </div>
 
         {/* Map */}
-        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }} className="pb-8 md:pb-12">
           <MapCanvas
             enableEditing={false}
             initialCenter={[78.4, 23.5]}

@@ -4,6 +4,8 @@ import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import React, { useState, useRef, useEffect } from "react";
 import GlassCarousel from "@/components/GlassCarousel";
+import MapCanvas from "@/components/map/MapCanvas";
+import MapSearchBar from "@/components/map/MapSearchBar";
 // UI-only landing page: no auth or data dependencies
 
 // Hook to track section visibility
@@ -605,6 +607,7 @@ function InteractiveJourneyCarousel({ isVisible }: { isVisible: boolean }) {
 export default function Home() {
   const { visibleSections, registerSection } = useSectionVisibility(0.3);
   const viewedSectionsRef = useRef<Set<string>>(new Set());
+  const flyToLocationRef = useRef<((center: [number, number], zoom?: number) => void) | null>(null);
   
   // Track sections that have been viewed (first time only)
   useEffect(() => {
@@ -1306,7 +1309,7 @@ export default function Home() {
           />
           <div className="pointer-events-none absolute inset-0 z-0 bg-gradient-to-b from-gray-50/50 via-white/30 to-white/50" />
 
-          <div className="relative z-10 max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+          <div className="relative z-10 max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-[1fr_1.3fr] gap-12 items-center">
             <motion.div
               initial={false}
               animate={hasViewed('howitworks') || visibleSections.has('howitworks') ? { opacity: 1, x: 0 } : { opacity: 0, x: -30 }}
@@ -1473,23 +1476,56 @@ export default function Home() {
               initial={false}
               animate={hasViewed('howitworks') || visibleSections.has('howitworks') ? { opacity: 1, x: 0 } : { opacity: 0, x: 30 }}
               transition={hasViewed('howitworks') ? { duration: 0 } : { duration: 0.8, ease: [0.22, 1, 0.36, 1], delay: 0.2 }}
-              whileHover={{ scale: 1.02, transition: { duration: 0.3 } }}
-              className="relative w-full h-72 md:h-96 rounded-3xl border border-white/40 bg-white/40 backdrop-blur-2xl shadow-[0_8px_32px_rgba(31,38,135,0.15)] overflow-hidden group"
+              className="relative w-full h-[600px] md:h-[700px] rounded-3xl border border-white/40 bg-white/40 backdrop-blur-2xl shadow-[0_8px_32px_rgba(31,38,135,0.15)] overflow-hidden flex flex-col"
             >
               {/* Glass gradient overlay */}
-              <div className="absolute inset-0 bg-gradient-to-br from-white/20 via-transparent to-white/10" />
-              <div className="absolute inset-0 ring-1 ring-white/50 rounded-3xl" />
-              {/* Placeholder content */}
-              <div className="absolute inset-0 flex items-center justify-center">
-                <motion.div
-                  initial={false}
-                  animate={hasViewed('howitworks') || visibleSections.has('howitworks') ? { scale: 1, opacity: 1 } : { scale: 0.8, opacity: 0.5 }}
-                  transition={hasViewed('howitworks') ? { duration: 0 } : { duration: 0.6, delay: 0.5 }}
-                  className="text-black/40 text-lg font-medium group-hover:text-black/60 transition-colors"
-                >
-                  App preview
-                </motion.div>
+              <div className="absolute inset-0 bg-gradient-to-br from-white/20 via-transparent to-white/10 z-10 pointer-events-none" />
+              <div className="absolute inset-0 ring-1 ring-white/50 rounded-3xl z-10 pointer-events-none" />
+              
+              {/* Map Section */}
+              <div className="relative flex-1 flex flex-col p-4 md:p-6 pb-8 md:pb-12 z-0">
+                {/* Page Heading */}
+                <div className="mb-4">
+                  <div className="flex items-center justify-between mb-3">
+                    <h1 className="text-xl md:text-2xl font-semibold tracking-tight">
+                      <span className="text-gray-900">Wander </span>
+                      <span className="text-[#0E8EEB]">Map</span>
+                    </h1>
+                    <div className="hidden md:block">
+                      <p className="text-xs md:text-sm text-gray-500 font-medium">
+                        Explore destinations, plan routes, discover your next adventure
+                      </p>
+                    </div>
+                  </div>
+                  <div className="h-px w-full bg-gradient-to-r from-gray-200 via-gray-200 to-transparent" />
                 </div>
+
+                {/* Search Bar */}
+                <div className="mb-4 relative z-30">
+                  <MapSearchBar
+                    onSelectPlace={(center, placeName) => {
+                      if (flyToLocationRef.current) {
+                        flyToLocationRef.current(center, 14);
+                      }
+                    }}
+                  />
+                </div>
+
+                {/* Map */}
+                <div className="flex-1 relative z-0 min-h-0 flex flex-col">
+                  <div className="flex-1 pb-6 md:pb-10">
+                    <MapCanvas
+                      enableEditing={false}
+                      initialCenter={[78.4, 23.5]}
+                      initialZoom={5.5}
+                      showSampleItineraries={true}
+                      onMapReady={(flyToLocation) => {
+                        flyToLocationRef.current = flyToLocation;
+                      }}
+                    />
+                  </div>
+                </div>
+              </div>
             </motion.div>
           </div>
         </section>
